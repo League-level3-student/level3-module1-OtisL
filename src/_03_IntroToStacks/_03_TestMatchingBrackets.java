@@ -25,8 +25,18 @@ public class _03_TestMatchingBrackets {
 			if(b.charAt(i)=='{') {
 				test.push(b.charAt(i));
 			}
+			else if(b.charAt(i)=='}') {
+				if(test.isEmpty()) {
+					return false;
+				}
+				test.pop();
+			}
 		}
-		return false;
+		if(test.isEmpty()) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 }

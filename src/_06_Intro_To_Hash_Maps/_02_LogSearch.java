@@ -53,9 +53,17 @@ public class _02_LogSearch implements ActionListener {
 		panel.add(add);
 		panel.add(search);
 		panel.add(list);
+		panel.add(remove);
 		add.addActionListener(this);
+		add.setText("add");
 		search.addActionListener(this);
+		search.setText("searchy boi");
 		list.addActionListener(this);
+		list.setText("listy boi");
+		remove.addActionListener(this);
+		remove.setText("removal services");
+		frame.setVisible(true);
+		frame.pack();
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -70,16 +78,33 @@ public class _02_LogSearch implements ActionListener {
 			int IDWanted = Integer.parseInt(wantedID);
 			boolean found=false;
 			for(int i=0; i<hash.size(); i++) {
-				if(hash.containsKey(i)) {
+				if(hash.containsKey(IDWanted)) {
 					found=true;
-					JOptionPane.showMessageDialog(null, "The person at that key is "+hash.get(i));
+					JOptionPane.showMessageDialog(null, "The person at that key is "+hash.get(IDWanted));
 				}
 			}
 			if(!found) {
-				JOptionPane.showMessageDialog(null, "Oh no! That key doesn't exist!", "OOF", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Shoot. We dropped the magnifying glass. Uhh can you try searching again?", "OOF-A Reference to Discord", JOptionPane.ERROR_MESSAGE);
 			}
 		}else if(e.getSource().equals(list)) {
-			//NEED TO FINISH THE LIST THEN THE REMOVE!!!
+			String keys = "";
+			for(Integer key : hash.keySet()) {
+				keys=keys+"Key: "+key+". Name: "+hash.get(key)+"\n";
+			}
+			JOptionPane.showMessageDialog(null, keys);
+		}else if(e.getSource().equals(remove)) {
+			String wantedID = JOptionPane.showInputDialog("What ID do you want to remove?");
+			int IDWanted = Integer.parseInt(wantedID);
+			boolean found=false;
+			for(int i=0; i<hash.size(); i++) {
+				if(hash.containsKey(IDWanted)) {
+					found=true;
+					hash.remove(IDWanted);
+				}
+			}
+			if(!found) {
+				JOptionPane.showMessageDialog(null, "That doesn't exist already!", "OOFity OOF O0F", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
 }
